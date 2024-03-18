@@ -1,31 +1,22 @@
-﻿const uint width = 40;
-const uint height = 10;
+﻿const int width = 80;
+const int height = 20;
 
-const double step = Math.PI / 2 / width;
+const double step = Math.PI*2 / width;
 
-string[] lines = new string[height];
+char[][] fb = new char[height][];
 
-for (int y = (int)height - 1; y >= 0; y--)
+for (int i = 0; i < height; i++)
 {
-
+    fb[i] = Enumerable.Repeat(' ', width).ToArray();
 }
 
-
-
-
-
-
-for (int x = 0; x < width / 2; x++)
+for (int x = 0; x < width; x++)
 {
-    uint y = Convert.ToUInt32(Math.Sin(step * x) * height);
-    char[] line = new char[width];
-    for (int x2 = 0; x2 < x; x2++ )
-    {
-        line[x2] = ' ';
-    }
-    line[x] = '*';
-    for (int x3 = x; x3 < width / 2; x3++)
-    {
-        line[x3] = ' ';
-    }
+    int y = (int)(height/2 + Math.Sin(x * step) * (height / 2 - 1));
+    fb[y][x] = '*';
+}
+
+for (int y = height - 1; y >= 0; y--)
+{
+    Console.WriteLine(fb[y]);
 }
